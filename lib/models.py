@@ -16,14 +16,9 @@ class Task:
     def complete(self):
         """
         Mark the task as completed and print confirmation.
-        
-        Returns:
-            str: Confirmation message
         """
         self.completed = True
-        message = f"✅ Task '{self.title}' completed."
-        print(message)
-        return message
+        print(f"✅ Task '{self.title}' completed.")
     
     def __str__(self):
         """String representation of the task."""
@@ -50,14 +45,9 @@ class User:
         
         Args:
             task (Task): The task to add
-            
-        Returns:
-            str: Confirmation message
         """
         self.tasks.append(task)
-        message = f"📌 Task '{task.title}' added to {self.name}."
-        print(message)
-        return message
+        print(f"📌 Task '{task.title}' added to {self.name}.")
     
     def get_task(self, title):
         """
@@ -73,19 +63,6 @@ class User:
             if task.title == title:
                 return task
         return None
-    
-    def list_tasks(self, show_completed=False):
-        """
-        List all tasks for the user.
-        
-        Args:
-            show_completed (bool): Whether to show completed tasks
-            
-        Returns:
-            list: List of task strings
-        """
-        tasks_to_show = self.tasks if show_completed else [t for t in self.tasks if not t.completed]
-        return [str(task) for task in tasks_to_show]
     
     def __str__(self):
         """String representation of the user."""
