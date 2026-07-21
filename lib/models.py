@@ -12,18 +12,13 @@ class Task:
         """
         self.title = title
         self.completed = False
-    
+
     def complete(self):
         """
         Mark the task as completed and print confirmation.
         """
         self.completed = True
         print(f"✅ Task '{self.title}' completed.")
-    
-    def __str__(self):
-        """String representation of the task."""
-        status = "✓" if self.completed else "○"
-        return f"[{status}] {self.title}"
 
 
 class User:
@@ -38,7 +33,7 @@ class User:
         """
         self.name = name
         self.tasks = []
-    
+
     def add_task(self, task):
         """
         Add a task to the user's task list.
@@ -48,22 +43,3 @@ class User:
         """
         self.tasks.append(task)
         print(f"📌 Task '{task.title}' added to {self.name}.")
-    
-    def get_task(self, title):
-        """
-        Find a task by its title.
-        
-        Args:
-            title (str): The task title to find
-            
-        Returns:
-            Task or None: The found task or None if not found
-        """
-        for task in self.tasks:
-            if task.title == title:
-                return task
-        return None
-    
-    def __str__(self):
-        """String representation of the user."""
-        return f"User: {self.name} ({len(self.tasks)} tasks)"
