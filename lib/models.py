@@ -1,34 +1,92 @@
-# TODO: Define the Task class
-# Each task should store a title and a completed status (default False)
-# Add a complete() method that marks the task as completed and prints confirmation
+"""Core models for the CLI task management system."""
 
 class Task:
+    """Represents a task with a title and completion status."""
+    
     def __init__(self, title):
-        # TODO: Assign the title
-        # TODO: Set completed to False
-        pass
-
+        """
+        Initialize a new task.
+        
+        Args:
+            title (str): The title/description of the task
+        """
+        self.title = title
+        self.completed = False
+    
     def complete(self):
-        # TODO: Mark the task as complete
-        # TODO: Print a confirmation message
-        pass
+        """
+        Mark the task as completed and print confirmation.
+        
+        Returns:
+            str: Confirmation message
+        """
+        self.completed = True
+        message = f"✅ Task '{self.title}' completed."
+        print(message)
+        return message
+    
+    def __str__(self):
+        """String representation of the task."""
+        status = "✓" if self.completed else "○"
+        return f"[{status}] {self.title}"
 
-# TODO: Define the User class
-# Each user has a name and a list of tasks
-# Add methods to add tasks and search tasks by title
 
 class User:
+    """Represents a user with a collection of tasks."""
+    
     def __init__(self, name):
-        # TODO: Store the user's name
-        # TODO: Initialize an empty list of tasks
-        pass
-
+        """
+        Initialize a new user.
+        
+        Args:
+            name (str): The user's name
+        """
+        self.name = name
+        self.tasks = []
+    
     def add_task(self, task):
-        # TODO: Add the task to the user's task list
-        # TODO: Print a message confirming the task was added
-        pass
-
-    def get_task_by_title(self, title):
-        # TODO: Search for a task by its title in the user's task list
-        # TODO: Return the matching task or None
-        pass
+        """
+        Add a task to the user's task list.
+        
+        Args:
+            task (Task): The task to add
+            
+        Returns:
+            str: Confirmation message
+        """
+        self.tasks.append(task)
+        message = f"📌 Task '{task.title}' added to {self.name}."
+        print(message)
+        return message
+    
+    def get_task(self, title):
+        """
+        Find a task by its title.
+        
+        Args:
+            title (str): The task title to find
+            
+        Returns:
+            Task or None: The found task or None if not found
+        """
+        for task in self.tasks:
+            if task.title == title:
+                return task
+        return None
+    
+    def list_tasks(self, show_completed=False):
+        """
+        List all tasks for the user.
+        
+        Args:
+            show_completed (bool): Whether to show completed tasks
+            
+        Returns:
+            list: List of task strings
+        """
+        tasks_to_show = self.tasks if show_completed else [t for t in self.tasks if not t.completed]
+        return [str(task) for task in tasks_to_show]
+    
+    def __str__(self):
+        """String representation of the user."""
+        return f"User: {self.name} ({len(self.tasks)} tasks)"
